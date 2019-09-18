@@ -7,18 +7,20 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
-
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
-
-  public static final int FRONT_LEFT_ANALOG_ENCODER = 0;
+  /**
+   * Encoders - Analog input channels
+   */
+  public static final int FRONT_LEFT_ANALOG_ENCODER  = 0;
   public static final int FRONT_RIGHT_ANALOG_ENCODER = 1;
-  public static final int REAR_LEFT_ANALOG_ENCODER = 2;
-  public static final int REAR_RIGHT_ANALOG_ENCODER = 3;
+  public static final int REAR_LEFT_ANALOG_ENCODER   = 2;
+  public static final int REAR_RIGHT_ANALOG_ENCODER  = 3;
+
+  /**
+   * Motors - CAN IDs
+   */
+  public static final int FRONT_LEFT_DRIVE_MOTOR  = 1;
+  public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
+  public static final int REAR_LEFT_DRIVE_MOTOR   = 3;
+  public static final int REAR_RIGHT_DRIVE_MOTOR  = 4;
+  /* TODO: Add Pivot motors */
 }
