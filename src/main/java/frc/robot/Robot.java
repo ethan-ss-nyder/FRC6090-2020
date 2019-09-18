@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    System.out.println(Subsystem.swerveDrive.getEncoders().get(SwerveDrive.Module.FRONT_LEFT).get());
+    System.out.println("Analog input 0: " + Subsystem.swerveDrive.getEncoders().get(SwerveDrive.Module.FRONT_LEFT).get());
   }
 
   /**
