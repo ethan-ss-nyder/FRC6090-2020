@@ -22,5 +22,9 @@ public class RobotMap {
   public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
   public static final int REAR_LEFT_DRIVE_MOTOR   = 3;
   public static final int REAR_RIGHT_DRIVE_MOTOR  = 4;
-  /* TODO: Add Pivot motors */
+  
+  public static final int FRONT_LEFT_PIVOT_MOTOR  = 5;
+  public static final int FRONT_RIGHT_PIVOT_MOTOR = 6;
+  public static final int REAR_LEFT_PIVOT_MOTOR   = 7;
+  public static final int REAR_RIGHT_PIVOT_MOTOR  = 8;
 }
