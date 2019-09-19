@@ -42,7 +42,7 @@ public abstract class SwerveDrive extends Subsystem {
     }
 
     public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
-        for (SwerveDriveCalculator.Module module : SwerveDriveCalculator.Module.values()) {
+        for (SwerveModule module : SwerveModule.values()) {
             double speed = calc.getWheelSpeed(module, fwd, str, rcw);
             double angle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle);
         }
