@@ -1,18 +1,23 @@
 package frc.robot.swerveio;
 
-public interface AbstractSwerveModule {
-    public void setPivotMotorSpeed(double speed);
-    public void setDriveMotorSpeed(double speed);
+public abstract class AbstractSwerveModule {
+    public abstract void setPivotMotorSpeed(double speed);
+    public abstract void setDriveMotorSpeed(double speed);
 
-    public double getPivotMotorSpeed();
-    public double getDriveMotorSpeed();
+    public abstract double getPivotMotorSpeed();
+    public abstract double getDriveMotorSpeed();
 
-    public double getPivotMotorEncoder();
-    public double getDriveMotorEncoder();
+    public abstract double getPivotMotorEncoder();
+    public abstract double getDriveMotorEncoder();
 
-    public void zeroPivotEncoder();
-    public void zeroDriveEncoder();
+    public abstract void zeroPivotEncoder();
+    public abstract void zeroDriveEncoder();
 
-    public void stopPivotMotor();
-    public void stopDriveMotor();
+    public abstract void stopPivotMotor();
+    public abstract void stopDriveMotor();
+
+    public final void stop() {
+        stopPivotMotor();
+        stopDriveMotor();
+    }
 }

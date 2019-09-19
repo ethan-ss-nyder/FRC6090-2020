@@ -8,11 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Subsystem;
+import frc.robot.Subsystems;
 
 public class DriveWithJoystick extends Command {
   public DriveWithJoystick() {
-    requires(Subsystem.driveTrain);
+    requires(Subsystems.driveTrain);
   }
 
   @Override

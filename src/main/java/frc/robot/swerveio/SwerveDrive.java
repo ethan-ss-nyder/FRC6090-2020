@@ -3,10 +3,10 @@ package frc.robot.swerveio;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class SwerveDrive extends Subsystem {
-    private BasicSwerveModule frontRightModule, frontLeftModule, rearLeftModule, rearRightModule;
+    private AbstractSwerveModule frontRightModule, frontLeftModule, rearLeftModule, rearRightModule;
     private SwerveDriveCalculator calc;
 
-    public SwerveDrive(double baseWidth, double baseLength, BasicSwerveModule frontLeftModule, BasicSwerveModule frontRightModule, BasicSwerveModule rearLeftModule, BasicSwerveModule rearRightModule) {
+    public SwerveDrive(double baseWidth, double baseLength, AbstractSwerveModule frontLeftModule, AbstractSwerveModule frontRightModule, AbstractSwerveModule rearLeftModule, AbstractSwerveModule rearRightModule) {
         StringBuilder nullModule = new StringBuilder("The following modules are null: [");
         boolean haveNullModule = false;
         if (frontRightModule == null) {
