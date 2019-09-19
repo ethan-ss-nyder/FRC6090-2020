@@ -10,10 +10,15 @@ public class RobotMap {
   /**
    * Encoders - Analog input channels
    */
-  public static final int FRONT_LEFT_ANALOG_ENCODER  = 0;
-  public static final int FRONT_RIGHT_ANALOG_ENCODER = 1;
-  public static final int REAR_LEFT_ANALOG_ENCODER   = 2;
-  public static final int REAR_RIGHT_ANALOG_ENCODER  = 3;
+  public static final int FRONT_LEFT_ANALOG_ENCODER_A  = 0;
+  public static final int FRONT_RIGHT_ANALOG_ENCODER_A = 1;
+  public static final int REAR_LEFT_ANALOG_ENCODER_A   = 2;
+  public static final int REAR_RIGHT_ANALOG_ENCODER_A  = 3;
+
+  public static final int FRONT_LEFT_ANALOG_ENCODER_B  = 0;
+  public static final int FRONT_RIGHT_ANALOG_ENCODER_B = 0;
+  public static final int REAR_LEFT_ANALOG_ENCODER_B   = 0;
+  public static final int REAR_RIGHT_ANALOG_ENCODER_B  = 0;
 
   /**
    * Motors - CAN IDs

@@ -1,7 +1,7 @@
 package frc.robot;
 
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.DriveTrain;
 
 public class Subsystem {
-    public static final SwerveDrive swerveDrive = new SwerveDrive();
+    public static final DriveTrain driveTrain = new DriveTrain();
 }
