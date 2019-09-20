@@ -10,7 +10,7 @@ public class NeoSwerveModule extends AbstractSwerveModule implements MultiEncode
 
 
     @Override
-    public void switchEncoder() {
+    public void setEncoder(Encoder encoder) {
         // TODO Auto-generated method stub
 
     }

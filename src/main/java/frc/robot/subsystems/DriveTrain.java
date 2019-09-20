@@ -2,9 +2,11 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoystick;
-import frc.robot.swerveio.AbstractSwerveModule;
+import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
+import frc.robot.swerveio.SwerveImplementationException;
 import frc.robot.swerveio.SwerveModule;
+import frc.robot.swerveio.MultiEncoderModule;
 
 import java.util.HashMap;
 
@@ -22,10 +24,10 @@ public class DriveTrain extends SwerveDrive {
   public static final double BASE_WIDTH = 10;
   public static final double BASE_LENGTH = 10;
 
-  private static final HashMap<SwerveModule, AbstractSwerveModule> modules = createModuleMap();
+  private static final HashMap<SwerveModule, NeoSwerveModule> modules = createModuleMap();
 
-  private static HashMap<SwerveModule, AbstractSwerveModule> createModuleMap() {
-    HashMap<SwerveModule, AbstractSwerveModule> moduleMap = new HashMap<SwerveModule, AbstractSwerveModule>();
+  private static HashMap<SwerveModule, NeoSwerveModule> createModuleMap() {
+    HashMap<SwerveModule, NeoSwerveModule> moduleMap = new HashMap<>();
     /* TODO put modules in the hashmap */
     return moduleMap;
   }
@@ -39,6 +41,15 @@ public class DriveTrain extends SwerveDrive {
       modules.get(SwerveModule.REAR_LEFT), modules.get(SwerveModule.REAR_RIGHT));
   }
 
+  @Override
+  public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
+    NeoSwerveModule testModule = modules.get(SwerveModule.FRONT_LEFT);
+    if (testModule.getEncoder() != MultiEncoderModule.Encoder.ANALOG) {
+      testModule.setEncoder(MultiEncoderModule.Encoder.ANALOG);
+    }
+    System.out.println("Test module ANALOG ENCODER: " + modules.get(SwerveModule.FRONT_LEFT).getDriveMotorEncoder());
+    super.drive(fwd, str, rcw, gyroAngle);
+  }
 
   @Override
   protected void initDefaultCommand() {
