@@ -1,11 +1,12 @@
 package frc.robot.swerveio;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class NeoSwerveModule extends AbstractSwerveModule implements MultiEncoderModule {
-
+    private CANSparkMax driveMotor;
     public NeoSwerveModule (int canId) {
-        
+        driveMotor = new CANSparkMax (canId, MotorType.kBrushless);
     }
 
 
