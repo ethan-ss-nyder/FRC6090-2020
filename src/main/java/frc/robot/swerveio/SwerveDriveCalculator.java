@@ -10,16 +10,6 @@ import java.awt.Rectangle;
  * @author Jordan Bancino
  */
 public class SwerveDriveCalculator {
-
-    /**
-     * Each module is driven independently, they all have their own speeds and
-     * angles. Use this enumeration to specify which module to calcuate.
-     */
-    public static enum Module {
-        FRONT_LEFT, FRONT_RIGHT,
-        REAR_LEFT, REAR_RIGHT
-    }
-
     private double baseWidth;
     private double baseLength;
 
@@ -138,7 +128,7 @@ public class SwerveDriveCalculator {
      * @param rcw The Z degree (from an input device)
      * @return The angle (in degrees) that the given wheel should be set to.
      */
-    public double getWheelAngle(Module module, double fwd, double str, double rcw) {
+    public double getWheelAngle(SwerveModule module, double fwd, double str, double rcw) {
         double[] tmp = getWheelConstants(module, fwd, str, rcw);
         return Math.toDegrees(Math.atan2(tmp[0], tmp[1]));
     }
@@ -155,7 +145,7 @@ public class SwerveDriveCalculator {
      * 
      * TODO: Possibly adjust radians/degrees conversions
      */
-    public double getWheelAngle(Module module, double fwd, double str, double rcw, double gyroAngle) {
+    public double getWheelAngle(SwerveModule module, double fwd, double str, double rcw, double gyroAngle) {
         double modFwd = fwd * Math.cos(Math.toRadians(gyroAngle)) + str * Math.sin(Math.toRadians(gyroAngle));
         double modStr = -fwd * Math.sin(Math.toRadians(gyroAngle)) + str * Math.cos(Math.toRadians(gyroAngle));
         return getWheelAngle(module, modFwd, modStr, rcw);
@@ -170,7 +160,7 @@ public class SwerveDriveCalculator {
      * @return The speed (scaled -1 to 1) that the wheel given wheel should be set
      * to.
      */
-    public double getWheelSpeed(Module module, double fwd, double str, double rcw) {
+    public double getWheelSpeed(SwerveModule module, double fwd, double str, double rcw) {
         double[] tmp = getWheelConstants(module, fwd, str, rcw);
         double wheelSpeed = Math.sqrt(Math.pow(tmp[0], 2) + Math.pow(tmp[1], 2));
         return (wheelSpeed > 1f) ? 1f : wheelSpeed;
@@ -187,7 +177,7 @@ public class SwerveDriveCalculator {
      * @return An array of floats containing the wheel constants. This array will always be of size
      * 2.
      */
-    private double[] getWheelConstants(Module module, double fwd, double str, double rcw) {
+    private double[] getWheelConstants(SwerveModule module, double fwd, double str, double rcw) {
         /* Calculate the ratio constant */
         final double R =  Math.sqrt(Math.pow(baseLength, 2) + Math.pow(baseWidth, 2));
         /* Allocate the array */
