@@ -1,12 +1,11 @@
 package frc.robot.subsystems;
 
-import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
 import frc.robot.swerveio.SwerveImplementationException;
 import frc.robot.swerveio.SwerveModule;
-import frc.robot.swerveio.MultiEncoderModule;
+import frc.robot.swerveio.MultiEncoderModule.EncoderSetting;
 
 import java.util.HashMap;
 
@@ -44,8 +43,8 @@ public class DriveTrain extends SwerveDrive {
   @Override
   public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
     NeoSwerveModule testModule = modules.get(SwerveModule.FRONT_LEFT);
-    if (testModule.getEncoder() != MultiEncoderModule.Encoder.ANALOG) {
-      testModule.setEncoder(MultiEncoderModule.Encoder.ANALOG);
+    if (testModule.getEncoderSetting() != EncoderSetting.ANALOG) {
+      testModule.setEncoder(EncoderSetting.ANALOG);
     }
     System.out.println("Test module ANALOG ENCODER: " + modules.get(SwerveModule.FRONT_LEFT).getDriveMotorEncoder());
     super.drive(fwd, str, rcw, gyroAngle);

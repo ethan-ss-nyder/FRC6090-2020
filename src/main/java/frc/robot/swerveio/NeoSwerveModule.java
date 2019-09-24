@@ -3,47 +3,49 @@ package frc.robot.swerveio;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Encoder;
+
 public class NeoSwerveModule extends AbstractSwerveModule implements MultiEncoderModule {
-    private CANSparkMax driveMotor;
-    public NeoSwerveModule (int canId) {
-        driveMotor = new CANSparkMax (canId, MotorType.kBrushless);
+    private CANSparkMax driveMotor, pivotMotor;
+    private Encoder analogEncoder;
+
+    private EncoderSetting currentlySetEncoder;
+    public NeoSwerveModule (int driveCanId, int pivotCanId, int analogEncoderChannelA, int analogEncoderChannelB) {
+        driveMotor = new CANSparkMax(driveCanId, MotorType.kBrushless);
+        pivotMotor = new CANSparkMax(pivotCanId, MotorType.kBrushless);
+        analogEncoder = new Encoder(analogEncoderChannelA, analogEncoderChannelB);
+        setEncoder(EncoderSetting.ANALOG);
     }
 
 
     @Override
-    public void setEncoder(Encoder encoder) {
-        // TODO Auto-generated method stub
-
+    public void setEncoder(EncoderSetting encoder) {
+        currentlySetEncoder = encoder;
     }
 
     @Override
-    public Encoder getEncoder() {
-        // TODO Auto-generated method stub
-        return null;
+    public EncoderSetting getEncoderSetting() {
+        return currentlySetEncoder;
     }
 
     @Override
     public void setPivotMotorSpeed(double speed) {
-        // TODO Auto-generated method stub
-
+        pivotMotor.set(speed);
     }
 
     @Override
     public void setDriveMotorSpeed(double speed) {
-        // TODO Auto-generated method stub
-
+        driveMotor.set(speed);
     }
 
     @Override
     public double getPivotMotorSpeed() {
-        // TODO Auto-generated method stub
-        return 0;
+        return pivotMotor.get();
     }
 
     @Override
     public double getDriveMotorSpeed() {
-        // TODO Auto-generated method stub
-        return 0;
+        return driveMotor.get();
     }
 
     @Override
@@ -72,13 +74,11 @@ public class NeoSwerveModule extends AbstractSwerveModule implements MultiEncode
 
     @Override
     public void stopPivotMotor() {
-        // TODO Auto-generated method stub
-
+        pivotMotor.stopMotor();
     }
 
     @Override
     public void stopDriveMotor() {
-        // TODO Auto-generated method stub
-
+        driveMotor.stopMotor();
     }
 }
