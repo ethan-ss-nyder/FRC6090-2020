@@ -33,11 +33,11 @@ public abstract class SwerveDrive extends Subsystem {
             this.frontRightModule = frontRightModule;
             this.rearLeftModule = rearLeftModule;
             this.rearRightModule = rearRightModule;
-        }
-        if (baseWidth <= 0 || baseLength <= 0) {
-            throw new IllegalArgumentException("Invalid base dimensions: " + baseWidth + " x " + baseLength);
-        } else {
-            this.calc = new SwerveDriveCalculator(baseWidth, baseLength);
+            if (baseWidth <= 0 || baseLength <= 0) {
+                this.calc = new SwerveDriveCalculator();
+            } else {
+                this.calc = new SwerveDriveCalculator(baseWidth, baseLength);
+            }
         }
     }
 
