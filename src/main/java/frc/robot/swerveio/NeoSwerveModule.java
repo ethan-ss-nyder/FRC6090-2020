@@ -50,25 +50,30 @@ public class NeoSwerveModule extends AbstractSwerveModule implements MultiEncode
 
     @Override
     public double getPivotMotorEncoder() {
-        // TODO Auto-generated method stub
-        return 0;
+        switch (currentlySetEncoder) {
+            case ANALOG:
+                return analogEncoder.get();
+            case SPARK_MAX:
+                return pivotMotor.getEncoder().getPosition();
+            default:
+                return 0;
+        }
     }
 
     @Override
     public double getDriveMotorEncoder() {
-        // TODO Auto-generated method stub
-        return 0;
+        return driveMotor.getEncoder().getPosition();
     }
 
     @Override
     public void zeroPivotEncoder() {
-        // TODO Auto-generated method stub
-
+        pivotMotor.getEncoder().setPosition(0);
+        analogEncoder.reset();
     }
 
     @Override
     public void zeroDriveEncoder() {
-        // TODO Auto-generated method stub
+        driveMotor.getEncoder().setPosition(0);
 
     }
 
