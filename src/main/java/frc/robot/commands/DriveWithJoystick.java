@@ -8,11 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 import frc.robot.Subsystems;
 
 public class DriveWithJoystick extends Command {
   public DriveWithJoystick() {
     requires(Subsystems.driveTrain);
+    requires(Subsystems.gyro);
   }
 
   @Override
@@ -21,7 +23,7 @@ public class DriveWithJoystick extends Command {
 
   @Override
   protected void execute() {
-    //Subsystem.driveTrain.drive(Robot.oi.getThrottledY(), Robot.oi.getThrottledX(), Robot.oi.getThrottledZ());
+    Subsystems.driveTrain.drive(Robot.oi.getThrottledY(), Robot.oi.getThrottledX(), Robot.oi.getThrottledZ(), Subsystems.gyro.getAngle());
   }
 
   @Override
