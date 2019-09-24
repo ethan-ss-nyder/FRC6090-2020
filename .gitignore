@@ -1,5 +1,3 @@
-# Created by https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
-
 ### Java ###
 # Compiled class file
 *.class
@@ -36,10 +34,6 @@ hs_err_pid*
 
 ### VisualStudioCode ###
 .vscode
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -73,14 +67,8 @@ $RECYCLE.BIN/
 # Cache of project
 .gradletasknamecache
 
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
-
 # # VS Code Specific Java Settings
 .classpath
 .project
 .settings/
 bin/
-
-
-# End of https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
