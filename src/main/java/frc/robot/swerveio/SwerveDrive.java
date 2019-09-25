@@ -1,9 +1,11 @@
 package frc.robot.swerveio;
 
+import java.util.HashMap;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class SwerveDrive extends Subsystem {
-    private AbstractSwerveModule frontRightModule, frontLeftModule, rearLeftModule, rearRightModule;
+    private HashMap<SwerveModule, AbstractSwerveModule> moduleMap;
     private SwerveDriveCalculator calc;
 
     public SwerveDrive(double baseWidth, double baseLength, AbstractSwerveModule frontLeftModule, AbstractSwerveModule frontRightModule, AbstractSwerveModule rearLeftModule, AbstractSwerveModule rearRightModule) {
@@ -29,10 +31,10 @@ public abstract class SwerveDrive extends Subsystem {
             nullModule.append("] Please provide an implemented swerve module for these parameters.");
             throw new SwerveImplementationException(nullModule.toString());
         } else {
-            this.frontLeftModule = frontLeftModule;
-            this.frontRightModule = frontRightModule;
-            this.rearLeftModule = rearLeftModule;
-            this.rearRightModule = rearRightModule;
+            moduleMap.put(SwerveModule.FRONT_LEFT, frontLeftModule);
+            moduleMap.put(SwerveModule.FRONT_RIGHT, frontRightModule);
+            moduleMap.put(SwerveModule.REAR_LEFT, rearLeftModule);
+            moduleMap.put(SwerveModule.REAR_RIGHT, rearRightModule);
             if (baseWidth <= 0 || baseLength <= 0) {
                 this.calc = new SwerveDriveCalculator();
             } else {
@@ -42,16 +44,22 @@ public abstract class SwerveDrive extends Subsystem {
     }
 
     public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
-        for (SwerveModule module : SwerveModule.values()) {
+        System.out.printf("[SwerveDrive] Driving with values: [fwd: %d, str: %d, rcw: %d, gyro: %d]\n");
+        for (SwerveModule module : moduleMap.keySet()) {
+            System.out.println("[SwerveDrive] - Module: " + module.name());
             double speed = calc.getWheelSpeed(module, fwd, str, rcw);
             double angle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle);
+            System.out.println("[SwerveDrive]   - Speed: " + speed);
+            System.out.println("[SwerveDrive}   - Angle: " + angle);
+            AbstractSwerveModule swerveModule = moduleMap.get(module);
+            swerveModule.setDriveMotorSpeed(speed);
+            
         }
     }
 
     public void stop() {
-        frontLeftModule.stop();
-        frontRightModule.stop();
-        rearLeftModule.stop();
-        rearRightModule.stop();
+        for (AbstractSwerveModule module : moduleMap.values()) {
+            module.stop();
+        }
     }
 }
