@@ -26,16 +26,6 @@ public class SwerveDriveCalculator {
         setBase(baseWidth, baseLength);
     }
 
-    /**
-     * Instantiate a calculator with the given base ratio. This is 
-     * the ratio of the width over the height.
-     * @param baseRatio The base ratio to use for this calculator.
-     */
-    public SwerveDriveCalculator(double baseRatio) {
-        double[] ratio = toFraction(baseRatio);
-        setBase(ratio[0], ratio[1]);
-    }
-
     public SwerveDriveCalculator(Rectangle base) {
         setBase(base.getWidth(), base.getHeight());
     }
@@ -94,30 +84,6 @@ public class SwerveDriveCalculator {
     public void setBase(double baseWidth, double baseLength) {
         setBaseWidth(baseWidth);
         setBaseLength(baseLength);
-    }
-
-    /**
-     * Convert a decimal value to a fraction.
-     * 
-     * Don't ask me how this works, I honestly have no idea.
-     * In fact, I don't even know if it works at all. I just
-     * copied from the internet and pasted it here.
-     * @param decimal The decimal value to convert
-     * @return An array containing the numerator as index 0, and
-     * the denominator as index 1.
-     */
-    private static double[] toFraction(double decimal) {
-        double tolerance = 1.0E-6;
-        double h1 = 1; double h2 = 0;
-        double k1 = 1; double k2 = 0;
-        double b = decimal;
-        do {
-            double a = Math.floor(b);
-            double aux = h1; h1 = a * h1 + h2; h2 = aux;
-            aux = k1; k1 = a * k1 + k2; k2 = aux;
-            b = 1 / (b - a);
-        } while (Math.abs(decimal - h1 / k1) > decimal * tolerance);
-        return new double[] { h1, k1 };
     }
 
     /**
