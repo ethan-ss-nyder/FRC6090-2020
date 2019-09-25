@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
@@ -25,9 +26,12 @@ public class DriveTrain extends SwerveDrive {
 
   private static final HashMap<SwerveModule, NeoSwerveModule> modules = createModuleMap();
 
-  private static HashMap<SwerveModule, NeoSwerveModule> createModuleMap() {
+  public static HashMap<SwerveModule, NeoSwerveModule> createModuleMap() {
     HashMap<SwerveModule, NeoSwerveModule> moduleMap = new HashMap<>();
-    /* TODO put modules in the hashmap */
+    moduleMap.put(SwerveModule.FRONT_LEFT, new NeoSwerveModule(RobotMap.FRONT_LEFT_DRIVE_MOTOR, RobotMap.FRONT_LEFT_PIVOT_MOTOR, RobotMap.FRONT_LEFT_ANALOG_ENCODER_A, RobotMap.FRONT_LEFT_ANALOG_ENCODER_B));
+    moduleMap.put(SwerveModule.FRONT_RIGHT, new NeoSwerveModule(RobotMap.FRONT_RIGHT_DRIVE_MOTOR, RobotMap.FRONT_RIGHT_PIVOT_MOTOR, RobotMap.FRONT_RIGHT_ANALOG_ENCODER_A, RobotMap.FRONT_RIGHT_ANALOG_ENCODER_B));
+    moduleMap.put(SwerveModule.REAR_LEFT, new NeoSwerveModule(RobotMap.REAR_LEFT_DRIVE_MOTOR, RobotMap.REAR_LEFT_PIVOT_MOTOR, RobotMap.REAR_LEFT_ANALOG_ENCODER_A, RobotMap.REAR_LEFT_ANALOG_ENCODER_B));
+    moduleMap.put(SwerveModule.REAR_RIGHT, new NeoSwerveModule(RobotMap.REAR_RIGHT_DRIVE_MOTOR, RobotMap.REAR_RIGHT_PIVOT_MOTOR, RobotMap.REAR_RIGHT_ANALOG_ENCODER_A, RobotMap.REAR_RIGHT_ANALOG_ENCODER_B));
     return moduleMap;
   }
 
