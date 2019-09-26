@@ -43,6 +43,10 @@ public abstract class SwerveDrive extends Subsystem {
         }
     }
 
+    public SwerveDrive(double baseWidth, double baseLength, HashMap<SwerveModule, MultiEncoderModule> moduleMap) {
+        this(baseWidth, baseLength, moduleMap.get(SwerveModule.FRONT_LEFT), moduleMap.get(SwerveModule.FRONT_RIGHT), moduleMap.get(SwerveModule.REAR_LEFT), moduleMap.get(SwerveModule.REAR_RIGHT));
+    }
+
     public abstract void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException;
 
     public void stop() {

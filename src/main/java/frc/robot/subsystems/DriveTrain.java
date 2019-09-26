@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.swerveio.AbstractSwerveModule;
+import frc.robot.swerveio.MultiEncoderModule;
 import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
 import frc.robot.swerveio.SwerveImplementationException;
@@ -25,10 +26,10 @@ public class DriveTrain extends SwerveDrive {
   public static final double BASE_WIDTH = 10;
   public static final double BASE_LENGTH = 10;
 
-  private static final HashMap<SwerveModule, NeoSwerveModule> modules = createModuleMap();
+  private static final HashMap<SwerveModule, MultiEncoderModule> modules = createModuleMap();
 
-  public static HashMap<SwerveModule, NeoSwerveModule> createModuleMap() {
-    HashMap<SwerveModule, NeoSwerveModule> moduleMap = new HashMap<>();
+  public static HashMap<SwerveModule, MultiEncoderModule> createModuleMap() {
+    HashMap<SwerveModule, MultiEncoderModule> moduleMap = new HashMap<>();
     moduleMap.put(SwerveModule.FRONT_LEFT, new NeoSwerveModule(RobotMap.FRONT_LEFT_DRIVE_MOTOR, RobotMap.FRONT_LEFT_PIVOT_MOTOR, RobotMap.FRONT_LEFT_ANALOG_ENCODER_A, RobotMap.FRONT_LEFT_ANALOG_ENCODER_B));
     moduleMap.put(SwerveModule.FRONT_RIGHT, new NeoSwerveModule(RobotMap.FRONT_RIGHT_DRIVE_MOTOR, RobotMap.FRONT_RIGHT_PIVOT_MOTOR, RobotMap.FRONT_RIGHT_ANALOG_ENCODER_A, RobotMap.FRONT_RIGHT_ANALOG_ENCODER_B));
     moduleMap.put(SwerveModule.REAR_LEFT, new NeoSwerveModule(RobotMap.REAR_LEFT_DRIVE_MOTOR, RobotMap.REAR_LEFT_PIVOT_MOTOR, RobotMap.REAR_LEFT_ANALOG_ENCODER_A, RobotMap.REAR_LEFT_ANALOG_ENCODER_B));
@@ -41,13 +42,12 @@ public class DriveTrain extends SwerveDrive {
    * robot map.
    */
   public DriveTrain() {
-    super(BASE_WIDTH, BASE_LENGTH, modules.get(SwerveModule.FRONT_LEFT), modules.get(SwerveModule.FRONT_RIGHT),
-      modules.get(SwerveModule.REAR_LEFT), modules.get(SwerveModule.REAR_RIGHT));
+    super(BASE_WIDTH, BASE_LENGTH, modules);
   }
 
   @Override
   public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
-    NeoSwerveModule testModule = modules.get(SwerveModule.FRONT_LEFT);
+    MultiEncoderModule testModule = modules.get(SwerveModule.FRONT_LEFT);
     if (testModule.getEncoderSetting() != EncoderSetting.ANALOG) {
       testModule.setEncoder(EncoderSetting.ANALOG);
     }

@@ -1,9 +1,9 @@
 package frc.robot.swerveio;
 
-public interface MultiEncoderModule {
+public abstract class MultiEncoderModule extends AbstractSwerveModule {
     public static enum EncoderSetting {
         ANALOG, SPARK_MAX
     }
-    public void setEncoder(EncoderSetting encoder);
-    public EncoderSetting getEncoderSetting();
+    public abstract void setEncoder(EncoderSetting encoder);
+    public abstract EncoderSetting getEncoderSetting();
 }

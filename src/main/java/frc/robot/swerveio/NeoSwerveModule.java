@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 
-public class NeoSwerveModule extends AbstractSwerveModule implements MultiEncoderModule {
+public class NeoSwerveModule extends MultiEncoderModule {
     private CANSparkMax driveMotor, pivotMotor;
     private Encoder analogEncoder;
 
