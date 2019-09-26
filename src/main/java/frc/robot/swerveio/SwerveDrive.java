@@ -43,10 +43,27 @@ public abstract class SwerveDrive extends Subsystem {
         }
     }
 
+    /**
+     * A compatibility constructor that allows a raw module map to be passed to the
+     * Swerve Drive
+     * @param baseWidth The width of the base
+     * @param baseLength The length of the base
+     * @param moduleMap A raw module map
+     */
     public SwerveDrive(double baseWidth, double baseLength, HashMap<SwerveModule, MultiEncoderModule> moduleMap) {
         this(baseWidth, baseLength, moduleMap.get(SwerveModule.FRONT_LEFT), moduleMap.get(SwerveModule.FRONT_RIGHT), moduleMap.get(SwerveModule.REAR_LEFT), moduleMap.get(SwerveModule.REAR_RIGHT));
     }
 
+    /**
+     * A drive function that should be implemented to drive the robot
+     * with the joystick.
+     * @param fwd The X value
+     * @param str The Y value
+     * @param rcw The Z value
+     * @param gyroAngle The angle of the gyro, used for field centric navigation.
+     * @throws SwerveImplementationException If there is an error with the implementation of 
+     * any swerve module.
+     */
     public abstract void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException;
 
     public void stop() {
