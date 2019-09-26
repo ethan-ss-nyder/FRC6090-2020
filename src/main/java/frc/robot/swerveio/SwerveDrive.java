@@ -5,8 +5,8 @@ import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class SwerveDrive extends Subsystem {
-    private HashMap<SwerveModule, AbstractSwerveModule> moduleMap;
-    private SwerveDriveCalculator calc;
+    protected HashMap<SwerveModule, AbstractSwerveModule> moduleMap;
+    protected SwerveDriveCalculator calc;
 
     public SwerveDrive(double baseWidth, double baseLength, AbstractSwerveModule frontLeftModule, AbstractSwerveModule frontRightModule, AbstractSwerveModule rearLeftModule, AbstractSwerveModule rearRightModule) {
         StringBuilder nullModule = new StringBuilder("The following modules are null: [");
@@ -43,19 +43,7 @@ public abstract class SwerveDrive extends Subsystem {
         }
     }
 
-    public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
-        System.out.printf("[SwerveDrive] Driving with values: [fwd: %d, str: %d, rcw: %d, gyro: %d]\n");
-        for (SwerveModule module : moduleMap.keySet()) {
-            System.out.println("[SwerveDrive] - Module: " + module.name());
-            double speed = calc.getWheelSpeed(module, fwd, str, rcw);
-            double angle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle);
-            System.out.println("[SwerveDrive]   - Speed: " + speed);
-            System.out.println("[SwerveDrive}   - Angle: " + angle);
-            AbstractSwerveModule swerveModule = moduleMap.get(module);
-            swerveModule.setDriveMotorSpeed(speed);
-            
-        }
-    }
+    public abstract void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException;
 
     public void stop() {
         for (AbstractSwerveModule module : moduleMap.values()) {

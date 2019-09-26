@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoystick;
+import frc.robot.swerveio.AbstractSwerveModule;
 import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
 import frc.robot.swerveio.SwerveImplementationException;
@@ -50,8 +51,21 @@ public class DriveTrain extends SwerveDrive {
     if (testModule.getEncoderSetting() != EncoderSetting.ANALOG) {
       testModule.setEncoder(EncoderSetting.ANALOG);
     }
+    System.out.println("---------------------------------------------");
     System.out.println("Test module ANALOG ENCODER: " + modules.get(SwerveModule.FRONT_LEFT).getDriveMotorEncoder());
-    super.drive(fwd, str, rcw, gyroAngle);
+    
+    System.out.printf("[SwerveDrive] Driving with values: [fwd: %d, str: %d, rcw: %d, gyro: %d]\n");
+    
+    for (SwerveModule module : modules.keySet()) {
+        System.out.println("[SwerveDrive] - Module: " + module.name());
+        double speed = calc.getWheelSpeed(module, fwd, str, rcw);
+        double angle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle);
+        System.out.println("[SwerveDrive]   - Speed: " + speed);
+        System.out.println("[SwerveDrive}   - Angle: " + angle);
+        AbstractSwerveModule swerveModule = modules.get(module);
+        swerveModule.setDriveMotorSpeed(speed);
+    }
+    System.out.println("---------------------------------------------");
   }
 
   @Override
