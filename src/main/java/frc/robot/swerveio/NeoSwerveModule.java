@@ -11,10 +11,14 @@ public class NeoSwerveModule extends MultiEncoderModule {
 
     private EncoderSetting currentlySetEncoder;
     public NeoSwerveModule (int driveCanId, int pivotCanId, int analogEncoderChannelA, int analogEncoderChannelB) {
+        System.out.println("Creating Drive motor: CAN ID " + driveCanId);
         driveMotor = new CANSparkMax(driveCanId, MotorType.kBrushless);
+        System.out.println("Creating Pivot motor: CAN ID " + pivotCanId);
         pivotMotor = new CANSparkMax(pivotCanId, MotorType.kBrushless);
+        System.out.println("Creating Encoder: CHANNEL A: " + analogEncoderChannelA + ", CHANNEL B: " + analogEncoderChannelB);
         analogEncoder = new Encoder(analogEncoderChannelA, analogEncoderChannelB);
         setEncoder(EncoderSetting.ANALOG);
+        
     }
 
 

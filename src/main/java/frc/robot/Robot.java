@@ -26,10 +26,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    System.out.println("Robot Init!");
     oi = new OI();
     //chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
+    new Subsystems();
   }
 
   /**

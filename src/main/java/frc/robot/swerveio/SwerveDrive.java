@@ -5,7 +5,7 @@ import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class SwerveDrive extends Subsystem {
-    protected HashMap<SwerveModule, AbstractSwerveModule> moduleMap;
+    protected HashMap<SwerveModule, AbstractSwerveModule> moduleMap = new HashMap<SwerveModule, AbstractSwerveModule>();
     protected SwerveDriveCalculator calc;
 
     public SwerveDrive(double baseWidth, double baseLength, AbstractSwerveModule frontLeftModule, AbstractSwerveModule frontRightModule, AbstractSwerveModule rearLeftModule, AbstractSwerveModule rearRightModule) {

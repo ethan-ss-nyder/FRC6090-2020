@@ -26,7 +26,7 @@ public class DriveTrain extends SwerveDrive {
   public static final double BASE_WIDTH = 10;
   public static final double BASE_LENGTH = 10;
 
-  private static final HashMap<SwerveModule, MultiEncoderModule> modules = createModuleMap();
+  private static HashMap<SwerveModule, MultiEncoderModule> modules = createModuleMap();
 
   public static HashMap<SwerveModule, MultiEncoderModule> createModuleMap() {
     HashMap<SwerveModule, MultiEncoderModule> moduleMap = new HashMap<>();
@@ -51,21 +51,17 @@ public class DriveTrain extends SwerveDrive {
     if (testModule.getEncoderSetting() != EncoderSetting.ANALOG) {
       testModule.setEncoder(EncoderSetting.ANALOG);
     }
-    System.out.println("---------------------------------------------");
-    System.out.println("Test module ANALOG ENCODER: " + modules.get(SwerveModule.FRONT_LEFT).getDriveMotorEncoder());
-    
-    System.out.printf("[SwerveDrive] Driving with values: [fwd: %d, str: %d, rcw: %d, gyro: %d]\n");
+    System.out.println("Test module ANALOG ENCODER: " + modules.get(SwerveModule.FRONT_LEFT).getPivotMotorEncoder());
     
     for (SwerveModule module : modules.keySet()) {
-        System.out.println("[SwerveDrive] - Module: " + module.name());
-        double speed = calc.getWheelSpeed(module, fwd, str, rcw);
-        double angle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle);
-        System.out.println("[SwerveDrive]   - Speed: " + speed);
-        System.out.println("[SwerveDrive}   - Angle: " + angle);
-        AbstractSwerveModule swerveModule = modules.get(module);
-        swerveModule.setDriveMotorSpeed(speed);
+        if (module != null) {
+          double speed = calc.getWheelSpeed(module, fwd, str, rcw);
+          double angle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle);
+          AbstractSwerveModule swerveModule = modules.get(module);
+          swerveModule.setDriveMotorSpeed(speed);
+          swerveModule.setPivotMotorSpeed(speed);
+        }
     }
-    System.out.println("---------------------------------------------");
   }
 
   @Override
