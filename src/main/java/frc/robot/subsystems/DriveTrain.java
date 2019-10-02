@@ -26,7 +26,7 @@ public class DriveTrain extends SwerveDrive {
   public static final double BASE_WIDTH = 10;
   public static final double BASE_LENGTH = 10;
 
-  private static HashMap<SwerveModule, MultiEncoderModule> modules = createModuleMap();
+  private static final HashMap<SwerveModule, MultiEncoderModule> modules = createModuleMap();
 
   public static HashMap<SwerveModule, MultiEncoderModule> createModuleMap() {
     HashMap<SwerveModule, MultiEncoderModule> moduleMap = new HashMap<>();
