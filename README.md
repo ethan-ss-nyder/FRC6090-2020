@@ -33,15 +33,15 @@ These tables store the latest versions of the software we use.
 | LimeLight | 2019.6.1             |
 
 ## Competition Checklist
-- Update Laptops
-    - Windows Update
-    - Code (always ` git pull` and `git checkout` the current competition branch)
-    - **See versions table for software updates**
-- Ensure laptop functionality
-    - Driver Station
-    - Dashboard
-    - Code can be modified and deployed
-- Charge laptops
+- [ ] Update Laptops
+    - [ ] Windows Update
+    - [ ] Code (always ` git pull` and `git checkout` the current competition branch)
+    - [ ] **See versions table for software updates**
+- [ ] Ensure laptop functionality
+    - [ ] Driver Station
+    - [ ] Dashboard
+    - [ ] Code can be modified and deployed
+- [ ] Charge laptops
 
 ## Contributors
 - Jordan Bancino
