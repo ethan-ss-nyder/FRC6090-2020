@@ -16,6 +16,9 @@ public abstract class AbstractSwerveModule {
     public abstract void stopPivotMotor();
     public abstract void stopDriveMotor();
 
+    public abstract void setDriveReference(double ref);
+    public abstract void setPivotReference(double ref);
+
     public final void stop() {
         stopPivotMotor();
         stopDriveMotor();
