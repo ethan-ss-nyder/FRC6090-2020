@@ -55,9 +55,9 @@ These tables store the latest versions of the software we use. Note that these a
 - Gradle may fail to resolve some dependencies. If this happens, you'll need to run this command to manually download
 them: 
 
-        ./gradlew downloadAll
+        $ gradle downloadAll
 
-- Gradle may not be able to find Java. Make sure you add `java` to the system path, and set the `JAVA_HOME` environment variable. You may have to restart your IDE after making these changes. **DO NOT** modify the Gradle scripts or any of the code to point to Java.
+- Gradle may not be able to find Java. Make sure you add `java` to the system path, and set the `JAVA_HOME` environment variable. You may have to restart your IDE after making these changes.
 
 ## Limelight Configurations
 As well as code, this repository contains the LimeLight configurations used at competitions. These are found in the `limelight-conf/` directory. Each `.vpr` file is a pipeline, and can be uploaded to a Limelight for immediate use. As the Limelight configurations change, these pipeline files are updated.
