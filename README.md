@@ -2,7 +2,7 @@
 The official repository of Team 6090's 2020 infinite recharge code, vision, and dashboard configurations.
 
 ## Versions Table
-These tables store the latest versions of the software we use.
+These tables store the latest versions of the software we use. Note that these are the latest versions *that work with FRC and WpiLib*.
 
 | Vendor Libraries | Latest Known Version |
 |------------------|----------------------|
@@ -20,7 +20,7 @@ These tables store the latest versions of the software we use.
 | Git              | 2.23.0               |
 | Phoenix Tuner    | 1.4.0                |
 | Spark Max Client | 1.0.0                |
-| Etcher           | 1.4.8                |
+| Etcher           | 1.5.57               |
 
 | Firmware  | Latest known Version |
 |-----------|----------------------|
@@ -30,7 +30,7 @@ These tables store the latest versions of the software we use.
 | Images    | Latest Known Version |
 |-----------|----------------------|
 | RoboRIO   | 2019.14              |
-| LimeLight | 2019.6.1             |
+| LimeLight | 2019.7.1             |
 
 ## Competition Checklist
 - [ ] Update Laptops
