@@ -16,6 +16,11 @@ import edu.wpi.first.wpilibj.SPI;
  * Add your docs here.
  */
 public class Gyro extends Subsystem {
+
+  public Gyro() {
+    zero();
+  }
+
   /* Create the AHRS NavX Gyro */
   private final AHRS navxGyro = new AHRS(SPI.Port.kMXP);
 
