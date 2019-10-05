@@ -173,4 +173,27 @@ public class SwerveDriveCalculator {
         }
         return tmp;
     }
+
+    /**
+     * Convert an encoder reading to degrees in terms of 360. This is useful for finding the current
+     * angle at which a module is pivoted.
+     * @param currentEncoderCount The count you wish to find the angle for.
+     * @param countsPerRevolution How many counts are in a revolution.
+     * @return The angle (in degrees) that the current encoder count represents in correlation to 
+     * the total counts per revolution.
+     */
+    public static double convertToDegrees(double currentEncoderCount, double countsPerRevolution) {
+        return (360 / countsPerRevolution) * currentEncoderCount;
+    }
+
+    /**
+     * Convert an angle measure into an encoder count. This useful for finding the encoder position
+     * to go to for a given angle.
+     * @param degreeMeasure The angle measure in degrees to find the count for.
+     * @param countsPerRevolution How many counts are in a revolution.
+     * @return The location on the encoder that will put the motor at that angle.
+     */
+    public static double convertFromDegrees(double degreeMeasure, double countsPerRevolution) {
+        return (countsPerRevolution / 360) * degreeMeasure;
+    }
 }
