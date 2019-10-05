@@ -23,7 +23,11 @@ public class DriveWithJoystick extends Command {
 
   @Override
   protected void execute() {
-    Subsystems.driveTrain.drive(Robot.oi.getThrottledY(), Robot.oi.getThrottledX(), Robot.oi.getThrottledZ(), Subsystems.gyro.getAngle());
+    double deadband = 0.2;
+    double y = Robot.oi.deadbandMod(Robot.oi.getThrottledY(), deadband);
+    double x = Robot.oi.deadbandMod(Robot.oi.getThrottledX(), deadband);
+    double z = Robot.oi.deadbandMod(Robot.oi.getThrottledZ(), deadband);
+    Subsystems.driveTrain.drive(y, x, z, Subsystems.gyro.getAngle());
   }
 
   @Override
