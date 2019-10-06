@@ -65,7 +65,6 @@ public class DriveTrain extends SwerveDrive {
 
   @Override
   public void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException {
-    
     for (SwerveModule module : modules.keySet()) {
       //SwerveModule module = SwerveModule.FRONT_LEFT;
         if (module != null) {
@@ -81,7 +80,6 @@ public class DriveTrain extends SwerveDrive {
            */
           double pivotRev = PIVOT_REVOLUTION.get(swerveModule.getEncoderSetting());
           double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, pivotRev);
-          System.out.println("Setting refererence for " + module + " : " + pivotRef + " (current: " + swerveModule.getPivotMotorEncoder() + ")");
           /* Pass the pivot reference into the pivot motor of the swerve module. */
           swerveModule.setPivotReference(pivotRef % pivotRev);
           /* Set the drive motor speed to the calculated speed. */
