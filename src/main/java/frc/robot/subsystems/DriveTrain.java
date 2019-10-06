@@ -72,25 +72,6 @@ public class DriveTrain extends SwerveDrive {
           double speed = calc.getWheelSpeed(module, fwd, str, rcw); /* Use the calculator to calculate wheel speed for this module. */
           double targetAngle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle); /* Calculate the pivot angle for this module. */
           MultiEncoderModule swerveModule = modules.get(module); /* Fetch the module from the module map so we can manipulate it. */
-          
-          /**
-           * Zero the pivot encoder if it is a multiple of the number of revolutions
-           * it takes to go around. This should allow the motor to take the quickest
-           * route to the setpoint, and also prevent errors with rotations.
-           * 
-           * The cast from double to integer is intentional, this will chop the decimal
-           * off to give us less precise numbers, which in this case is desireable so we
-           * don't have to check a range. The absolute value of the pivot position is also
-           * checked because we don't need to deal with negative numbers.
-           * 
-           * This code is UNTESTED, hence it being commented out.
-           */
-          /*
-          int pivotPosition = (int) swerveModule.getPivotMotorEncoder();
-          if (pivotPosition == 0 || Math.abs(pivotPosition) % (int) PIVOT_REVOLUTION == 0) {
-            swerveModule.zeroPivotEncoder();
-          }
-          */
 
           /**
            * Convert the target angle from a degree measure to an encoder reference using the
@@ -98,10 +79,11 @@ public class DriveTrain extends SwerveDrive {
            * and how many encoder counts it takes to go one full revolution to convert the angle
            * into an encoder count.
            */
-          double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, PIVOT_REVOLUTION.get(swerveModule.getEncoderSetting()));
-          System.out.println("Setting refererence for " + module + " : " + pivotRef);
+          double pivotRev = PIVOT_REVOLUTION.get(swerveModule.getEncoderSetting());
+          double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, pivotRev);
+          System.out.println("Setting refererence for " + module + " : " + pivotRef + " (current: " + swerveModule.getPivotMotorEncoder() + ")");
           /* Pass the pivot reference into the pivot motor of the swerve module. */
-          swerveModule.setPivotReference(pivotRef);
+          swerveModule.setPivotReference(pivotRef % pivotRev);
           /* Set the drive motor speed to the calculated speed. */
           swerveModule.setDriveMotorSpeed(speed);
         }

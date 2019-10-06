@@ -33,6 +33,8 @@ public class NeoSwerveModule extends MultiEncoderModule {
         pivotPid.setIZone(0);
         pivotPid.setFF(0);
         pivotPid.setOutputRange(-1, 1);
+
+        
         
     }
 

@@ -28,6 +28,10 @@ public class Gyro extends Subsystem {
     return navxGyro.getAngle();
   }
 
+  public double getYaw() {
+    return navxGyro.getYaw();
+  }
+
   public void zero() {
     navxGyro.zeroYaw();
   }

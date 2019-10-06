@@ -27,7 +27,7 @@ public class DriveWithJoystick extends Command {
     double y = Robot.oi.deadbandMod(Robot.oi.getThrottledY(), deadband);
     double x = Robot.oi.deadbandMod(Robot.oi.getThrottledX(), deadband);
     double z = Robot.oi.deadbandMod(Robot.oi.getThrottledZ(), deadband);
-    Subsystems.driveTrain.drive(y, x, z, Subsystems.gyro.getAngle());
+    Subsystems.driveTrain.drive(y, x, z, Subsystems.gyro.getYaw());
   }
 
   @Override
