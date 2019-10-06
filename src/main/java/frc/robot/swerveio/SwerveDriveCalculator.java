@@ -112,14 +112,6 @@ public class SwerveDriveCalculator {
      * TODO: Possibly adjust radians/degrees conversions
      */
     public double getWheelAngle(SwerveModule module, double fwd, double str, double rcw, double gyroAngle) {
-        /*
-         * If the gyro angle is less than zero, it's safe to say that
-         * the given angle goes in terms of 0 to 180 and 0 to -180.
-         * We want degrees in terms of 0 to 360.
-         */
-        if (gyroAngle < 0) {
-            gyroAngle = 360 - Math.abs(gyroAngle);
-        }
 
         double cosAngle = Math.cos(Math.toRadians(gyroAngle));
         double sinAngle = Math.sin(Math.toRadians(gyroAngle));
