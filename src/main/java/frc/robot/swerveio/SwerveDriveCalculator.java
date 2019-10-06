@@ -112,8 +112,19 @@ public class SwerveDriveCalculator {
      * TODO: Possibly adjust radians/degrees conversions
      */
     public double getWheelAngle(SwerveModule module, double fwd, double str, double rcw, double gyroAngle) {
-        double modFwd = fwd * Math.cos(Math.toRadians(gyroAngle)) + str * Math.sin(Math.toRadians(gyroAngle));
-        double modStr = -fwd * Math.sin(Math.toRadians(gyroAngle)) + str * Math.cos(Math.toRadians(gyroAngle));
+        /*
+         * If the gyro angle is less than zero, it's safe to say that
+         * the given angle goes in terms of 0 to 180 and 0 to -180.
+         * We want degrees in terms of 0 to 360.
+         */
+        if (gyroAngle < 0) {
+            gyroAngle = 360 - Math.abs(gyroAngle);
+        }
+
+        double cosAngle = Math.cos(Math.toRadians(gyroAngle));
+        double sinAngle = Math.sin(Math.toRadians(gyroAngle));
+        double modFwd = fwd * cosAngle + str * sinAngle;
+        double modStr = -fwd * sinAngle + str * cosAngle;
         return getWheelAngle(module, modFwd, modStr, rcw);
     }
 
@@ -154,19 +165,19 @@ public class SwerveDriveCalculator {
          * how these are calcuated, it's just a little basic trig. 
          */
         switch (module) {
-            case FRONT_RIGHT:
+            case FRONT_LEFT:
                 tmp[0] = str + rcw * (baseLength / R);
                 tmp[1] = fwd - rcw * (baseWidth / R);
                 break;
-            case FRONT_LEFT:
+            case FRONT_RIGHT:
                 tmp[0] = str + rcw * (baseLength / R);
                 tmp[1] = fwd + rcw * (baseWidth / R);
                 break;
-            case REAR_LEFT:
+            case REAR_RIGHT:
                 tmp[0] = str - rcw * (baseLength / R);
                 tmp[1] = fwd + rcw * (baseWidth / R);
                 break;
-            case REAR_RIGHT:
+            case REAR_LEFT:
                 tmp[0] = str - rcw * (baseLength / R);
                 tmp[1] = fwd - rcw * (baseWidth / R);
                 break;
