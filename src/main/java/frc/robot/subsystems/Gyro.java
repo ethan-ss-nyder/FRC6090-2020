@@ -33,7 +33,12 @@ public class Gyro extends Subsystem {
   }
 
   public void zero() {
+    System.out.println("NavX Zero-ed!");
     navxGyro.zeroYaw();
+  }
+
+  public boolean isConnected() {
+    return navxGyro.isConnected();
   }
 
   @Override
