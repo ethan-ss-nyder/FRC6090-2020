@@ -7,6 +7,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  * 
+ * This exact class defines an operator interface that consists of one 3 axis
+ * joystick, and an X-Box controller. The throttle, X, Y, and Z axes come from
+ * the joystick, everything else comes from the X-Box controller. Buttons can be mapped
+ * to certain functions as well, since there are a few spare buttons on the Joystick.
+ * 
  * @author Jordan Bancino
  * @version 1.0
  * @since 1.0
@@ -16,8 +21,7 @@ public class OI {
   public static final int JOYSTICK_PORT = 0;
   public static final int XBOX_PORT = 1;
 
-  /* Joystick Axes & Buttons */
-  public static final int SLIDER_AXIS = 3;
+  /* Joystick Buttons */
   public static final int JOYSTICK_BUTTON_COUNT = 12;
 
   /*
@@ -41,7 +45,8 @@ public class OI {
       joystickButton[i] = new JoystickButton(joystick, i);
     }
     /* Assign button actions here */
-
+    /* joystickButton[2].whileHeld(new SomeCommand()); */
+    /* joystickButton[9].whenPressed(new AnotherCommand());*/
   }
 
   /**
@@ -49,7 +54,7 @@ public class OI {
    * @return The raw axis value of the slider.
    */
   public double getRawThrottle() {
-    return this.joystick.getRawAxis(SLIDER_AXIS);
+    return this.joystick.getRawAxis(3);
   }
 
   /**
