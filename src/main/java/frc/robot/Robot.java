@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Jordan Bancino
  */
 public class Robot extends TimedRobot {
+  /* The Operator Interface */
   public static OI oi;
 
   Command autonomousCommand;
