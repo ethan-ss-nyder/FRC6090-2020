@@ -65,5 +65,16 @@ As well as code, this repository contains the LimeLight configurations used at c
 ## Shuffleboard
 Shuffleboard is the experimental dashboard used this season. The exact layout used is in `shuffleboard.json`. As the Shuffleboard layout is changed, this file is updated.
 
+## Tools
+
+### `rio-network.sh`
+Linux users do not need the Update Suite to deploy to a RoboRIO via ethernet or USB, but rather, can use this script to set up the DHCP server to properly connect. This script works over both USB and ethernet.
+
+Usage:
+
+    $ ./rio-network.sh eth0
+
+Note that this needs to be run as `root`, and of course provide the interface that you're connected to, either USB or Ethernet. You should not need this tool for deploying wirelessly as the radio will automatically  take care of DHCP operations.
+
 ## Contributing
 TODO: add contributing guide here.
