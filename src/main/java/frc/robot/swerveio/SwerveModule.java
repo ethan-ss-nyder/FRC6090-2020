@@ -2,7 +2,8 @@ package frc.robot.swerveio;
 
 /**
 * Each module is driven independently, they all have their own speeds and
- * angles. Use this enumeration to specify which module to calcuate.
+ * angles. Use this enumeration to specify modules.
+ * @author Jordan Bancino
  */
  public enum SwerveModule {
     FRONT_LEFT, FRONT_RIGHT,

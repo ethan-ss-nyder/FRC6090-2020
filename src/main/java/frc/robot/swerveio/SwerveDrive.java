@@ -4,10 +4,30 @@ import java.util.HashMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * A class designed to be extended extended and used as a WPILib
+ * subsystem. This takes care of consolidating swerve modules
+ * so they can be driven as a system easily.
+ * @author Jordan Bancino
+ */
 public abstract class SwerveDrive extends Subsystem {
+    /**
+     * A module map that contains all the swerve modules in this
+     * swerve drive. For internal use only, this can be used to pull
+     * specific modules, and also iterate over all the modules.
+     */
     protected HashMap<SwerveModule, AbstractSwerveModule> moduleMap = new HashMap<SwerveModule, AbstractSwerveModule>();
+    
+    /**
+     * A calculator is provided by default so that calculations can be
+     * easily retrieved. If invalid base dimensions are provide, the
+     * default of a 1:1 base is used.
+     */
     protected SwerveDriveCalculator calc;
 
+    /**
+     * Create the swerve drive with the base dimensions and the modules.
+     */
     public SwerveDrive(double baseWidth, double baseLength, AbstractSwerveModule frontLeftModule, AbstractSwerveModule frontRightModule, AbstractSwerveModule rearLeftModule, AbstractSwerveModule rearRightModule) {
         StringBuilder nullModule = new StringBuilder("The following modules are null: [");
         boolean haveNullModule = false;
@@ -66,9 +86,32 @@ public abstract class SwerveDrive extends Subsystem {
      */
     public abstract void drive(double fwd, double str, double rcw, double gyroAngle) throws SwerveImplementationException;
 
+    /**
+     * Stop all the modules, stopping this swerve drive.
+     */
     public void stop() {
         for (AbstractSwerveModule module : moduleMap.values()) {
             module.stop();
         }
     }
+
+    /**
+     * Zero all the pivot and drive encoders in this swerve drive.
+     */
+    public void zero() {
+        for (AbstractSwerveModule module : moduleMap.values()) {
+            module.zero();
+        }
+    }
+
+    /**
+     * Calls the reset function on all the modules, stopping each
+     * module and resetting all the encoders
+     */
+    public void reset() {
+        for (AbstractSwerveModule module : moduleMap.values()) {
+            module.reset();
+        }
+    }
+    
 }

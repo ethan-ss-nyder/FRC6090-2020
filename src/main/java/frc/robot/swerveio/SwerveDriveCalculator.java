@@ -26,6 +26,12 @@ public class SwerveDriveCalculator {
         setBase(baseWidth, baseLength);
     }
 
+    /**
+     * Create the swerve drive calculator using a rectangle object
+     * for dimensions.
+     * @param base The rectangle that represents the dimensions
+     * of the base.
+     */
     public SwerveDriveCalculator(Rectangle base) {
         setBase(base.getWidth(), base.getHeight());
     }
@@ -108,11 +114,8 @@ public class SwerveDriveCalculator {
      * @param rcw The Z degree (from an input device)
      * @param gyroAngle The gyro angle (in degrees) measured from the zero position (sraight down field)
      * @return The angle (in degrees) that the given wheel should be set to.
-     * 
-     * TODO: Possibly adjust radians/degrees conversions
      */
     public double getWheelAngle(SwerveModule module, double fwd, double str, double rcw, double gyroAngle) {
-
         double cosAngle = Math.cos(Math.toRadians(gyroAngle));
         double sinAngle = Math.sin(Math.toRadians(gyroAngle));
         double modFwd = fwd * cosAngle + str * sinAngle;

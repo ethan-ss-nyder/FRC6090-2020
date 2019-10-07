@@ -6,13 +6,28 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+/**
+ * A swerve module implementation that uses RevRobotics Neo
+ * motors and Spark Max motor controllers.
+ * @author Jordan Bancino
+ */
 public class NeoSwerveModule extends AbstractSwerveModule {
     private CANSparkMax driveMotor, pivotMotor;
 
     private CANPIDController pivotPid;
 
+    /**
+     * The swerve module is constructed to allow the pivot motor
+     * to coast, this allows for adjustments, but as soon as the
+     * module is driven, it switches to brake mode to prevent
+     * outside modifications.
+     */
     private boolean setPivotIdleMode = false;
 
+    /**
+     * Create a new swerve module composed of Neo brushless
+     * motors, this uses spark max motor controllers.
+     */
     public NeoSwerveModule (int driveCanId, int pivotCanId) {
         driveMotor = new CANSparkMax(driveCanId, MotorType.kBrushless);
         pivotMotor = new CANSparkMax(pivotCanId, MotorType.kBrushless);
@@ -91,6 +106,6 @@ public class NeoSwerveModule extends AbstractSwerveModule {
 
     @Override
     public void setDriveReference(double ref) {
-        throw new UnsupportedOperationException("setDriveReference() is not implemented for NeoSwerveModule!");
+        throw new SwerveImplementationException("setDriveReference() is not implemented for NeoSwerveModule!");
     }
 }
