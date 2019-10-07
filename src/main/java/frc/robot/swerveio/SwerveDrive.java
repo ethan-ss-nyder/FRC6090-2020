@@ -50,7 +50,7 @@ public abstract class SwerveDrive extends Subsystem {
      * @param baseLength The length of the base
      * @param moduleMap A raw module map
      */
-    public SwerveDrive(double baseWidth, double baseLength, HashMap<SwerveModule, MultiEncoderModule> moduleMap) {
+    public SwerveDrive(double baseWidth, double baseLength, HashMap<SwerveModule, AbstractSwerveModule> moduleMap) {
         this(baseWidth, baseLength, moduleMap.get(SwerveModule.FRONT_LEFT), moduleMap.get(SwerveModule.FRONT_RIGHT), moduleMap.get(SwerveModule.REAR_LEFT), moduleMap.get(SwerveModule.REAR_RIGHT));
     }
 

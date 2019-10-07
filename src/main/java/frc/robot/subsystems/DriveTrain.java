@@ -2,13 +2,12 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveWithJoystick;
-import frc.robot.swerveio.MultiEncoderModule;
+import frc.robot.swerveio.AbstractSwerveModule;
 import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
 import frc.robot.swerveio.SwerveDriveCalculator;
 import frc.robot.swerveio.SwerveImplementationException;
 import frc.robot.swerveio.SwerveModule;
-import frc.robot.swerveio.MultiEncoderModule.EncoderSetting;
 
 import java.util.HashMap;
 
@@ -31,26 +30,19 @@ public class DriveTrain extends SwerveDrive {
    * on the pivot motor. This is set up for MultiEncoderModules that may switch back
    * and forth between encoders, so each encoder's revolution constant can be set here.
    */
-  public static final HashMap<EncoderSetting, Double> PIVOT_REVOLUTION = new HashMap<>();
-  static {
-    PIVOT_REVOLUTION.put(EncoderSetting.SPARK_MAX, 17.90471839904785);
-  }
+  public static final double PIVOT_REVOLUTION = 17.90471839904785;
 
-  private static final HashMap<SwerveModule, MultiEncoderModule> modules = createModuleMap();
+  private static final HashMap<SwerveModule, AbstractSwerveModule> modules = createModuleMap();
 
-  public static HashMap<SwerveModule, MultiEncoderModule> createModuleMap() {
-    HashMap<SwerveModule, MultiEncoderModule> moduleMap = new HashMap<>();
-    moduleMap.put(SwerveModule.FRONT_LEFT, new NeoSwerveModule(RobotMap.FRONT_LEFT_DRIVE_MOTOR, RobotMap.FRONT_LEFT_PIVOT_MOTOR, RobotMap.FRONT_LEFT_ANALOG_ENCODER_A, RobotMap.FRONT_LEFT_ANALOG_ENCODER_B));
-    moduleMap.put(SwerveModule.FRONT_RIGHT, new NeoSwerveModule(RobotMap.FRONT_RIGHT_DRIVE_MOTOR, RobotMap.FRONT_RIGHT_PIVOT_MOTOR, RobotMap.FRONT_RIGHT_ANALOG_ENCODER_A, RobotMap.FRONT_RIGHT_ANALOG_ENCODER_B));
-    moduleMap.put(SwerveModule.REAR_LEFT, new NeoSwerveModule(RobotMap.REAR_LEFT_DRIVE_MOTOR, RobotMap.REAR_LEFT_PIVOT_MOTOR, RobotMap.REAR_LEFT_ANALOG_ENCODER_A, RobotMap.REAR_LEFT_ANALOG_ENCODER_B));
-    moduleMap.put(SwerveModule.REAR_RIGHT, new NeoSwerveModule(RobotMap.REAR_RIGHT_DRIVE_MOTOR, RobotMap.REAR_RIGHT_PIVOT_MOTOR, RobotMap.REAR_RIGHT_ANALOG_ENCODER_A, RobotMap.REAR_RIGHT_ANALOG_ENCODER_B));
+  public static HashMap<SwerveModule, AbstractSwerveModule> createModuleMap() {
+    HashMap<SwerveModule, AbstractSwerveModule> moduleMap = new HashMap<>();
+    moduleMap.put(SwerveModule.FRONT_LEFT, new NeoSwerveModule(RobotMap.FRONT_LEFT_DRIVE_MOTOR, RobotMap.FRONT_LEFT_PIVOT_MOTOR));
+    moduleMap.put(SwerveModule.FRONT_RIGHT, new NeoSwerveModule(RobotMap.FRONT_RIGHT_DRIVE_MOTOR, RobotMap.FRONT_RIGHT_PIVOT_MOTOR));
+    moduleMap.put(SwerveModule.REAR_LEFT, new NeoSwerveModule(RobotMap.REAR_LEFT_DRIVE_MOTOR, RobotMap.REAR_LEFT_PIVOT_MOTOR));
+    moduleMap.put(SwerveModule.REAR_RIGHT, new NeoSwerveModule(RobotMap.REAR_RIGHT_DRIVE_MOTOR, RobotMap.REAR_RIGHT_PIVOT_MOTOR));
     for (var module : moduleMap.values()) {
-      if (module.getEncoderSetting() != EncoderSetting.SPARK_MAX) {
-        module.setEncoder(EncoderSetting.SPARK_MAX);
-      }
       module.zeroDriveEncoder();
       module.zeroPivotEncoder();
-      
     }
     return moduleMap;
   }
@@ -70,7 +62,7 @@ public class DriveTrain extends SwerveDrive {
         if (module != null) {
           double speed = calc.getWheelSpeed(module, fwd, str, rcw); /* Use the calculator to calculate wheel speed for this module. */
           double targetAngle = calc.getWheelAngle(module, fwd, str, rcw, gyroAngle); /* Calculate the pivot angle for this module. */
-          MultiEncoderModule swerveModule = modules.get(module); /* Fetch the module from the module map so we can manipulate it. */
+          AbstractSwerveModule swerveModule = modules.get(module); /* Fetch the module from the module map so we can manipulate it. */
 
           /**
            * Convert the target angle from a degree measure to an encoder reference using the
@@ -78,7 +70,7 @@ public class DriveTrain extends SwerveDrive {
            * and how many encoder counts it takes to go one full revolution to convert the angle
            * into an encoder count.
            */
-          double pivotRev = PIVOT_REVOLUTION.get(swerveModule.getEncoderSetting());
+          double pivotRev = PIVOT_REVOLUTION;
           double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, pivotRev);
           /* Pass the pivot reference into the pivot motor of the swerve module. */
           swerveModule.setPivotReference(pivotRef % pivotRev);
