@@ -38,12 +38,7 @@ public class Robot extends TimedRobot {
      */
 
     /* Zero the drivetrain encoders when button 11 is pressed. */
-    oi.registerCommand(11, ActionType.PRESS, new Runnable() {
-      @Override
-      public void run() {
-        Subsystems.driveTrain.zero();
-      }
-    }, Subsystems.driveTrain);
+    oi.registerCommand(11, ActionType.PRESS, () -> Subsystems.driveTrain.zero(), Subsystems.driveTrain);
 
     //chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
