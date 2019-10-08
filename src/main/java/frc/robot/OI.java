@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -82,6 +83,53 @@ public class OI {
         joystickButton[button].whileHeld(command);
         break;
     }
+  }
+
+  /**
+   * Registers a runnable interface as a command. This is extremely useful when subsystem
+   * API methods need to be called directly from a joystick button, or some other random,
+   * very simplistic code needs to be run that doesn't necessarily require a full command.
+   * This is most practical when the runnable inteface is implemented as an annonomous class,
+   * allowing very minimal code to be written. Runnable's run() function is executed.
+   * @param button The button to map the runnable too.
+   * @param actionType The button action type.
+   * @param runnable The instantiation of Runnable to execute. This is actually wrapped into a custom command that
+   * is then passed to the other form of registerCommand(), but this method is specifically designed to allow very
+   * small segments of code to run.
+   * @param requiredSubsystems If any, the subsystems required to run this runnable. Keep in mind that the code inside
+   *  the runnable is not looped, it is executed once via Command.execute().
+   */
+  public void registerCommand(int button, ActionType actionType, Runnable runnable, Subsystem... requiredSubsystems) {
+    /**
+     * This is honestly quite a hack. It's a nested class that extends the command, implementing the only two
+     * required methods, isFinished() and execute(). In execute, Runnable's run function is called, the the
+     * command is signalled to terminate. This is designed to be a quick and efficient way of running very
+     * minimal code. 
+     */
+    class RunnableCommand extends Command {
+
+      private boolean isFinished = false;
+      private Runnable runnable;
+
+      public RunnableCommand(Runnable runnable, Subsystem[] requiredSubsystems) {
+        for (Subsystem subsystem : requiredSubsystems) {
+          requires(subsystem);
+        }
+        this.runnable = runnable;
+      }
+
+      @Override
+      protected boolean isFinished() {
+        return isFinished;
+      }
+
+      @Override
+      protected void execute() {
+        runnable.run();
+        isFinished = true;
+      }
+    }
+    registerCommand(button, actionType, new RunnableCommand(runnable, requiredSubsystems));
   }
 
   /**
