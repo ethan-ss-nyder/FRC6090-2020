@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveWithJoystick;
+import frc.robot.commands.joystick.DriveWithJoystick;
 import frc.robot.swerveio.AbstractSwerveModule;
 import frc.robot.swerveio.NeoSwerveModule;
 import frc.robot.swerveio.SwerveDrive;
