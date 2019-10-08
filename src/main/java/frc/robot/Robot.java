@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI.ActionType;
+import frc.robot.commands.ZeroDrivetrainEncoders;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,10 +31,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.println("Robot Init!");
     oi = new OI();
+    /*
+     * Button actions are registered on robot init using the registerCommand()
+     * method, which is a streamlined, cleaner version than placing commands directly
+     * in the OI. This method allows the OI to be portable, that is, it can be used
+     * across robot projects and years. 
+     */
+    oi.registerCommand(11, ActionType.PRESS, new ZeroDrivetrainEncoders());
+
     //chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
-    Subsystems.driveTrain.stop();
   }
 
   /**
