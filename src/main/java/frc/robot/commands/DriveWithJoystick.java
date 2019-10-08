@@ -41,15 +41,27 @@ public class DriveWithJoystick extends Command {
     Subsystems.driveTrain.drive(y, x, z, Subsystems.gyro.getYaw());
   }
 
+  /**
+   * Don't end on our own, require an interruption
+   */
   @Override
   protected boolean isFinished() {
     return false;
   }
 
+  /**
+   * Stop moving when the joystick is no longer in control.
+   * Generally, autonomous commands will take over from here.
+   */
   @Override
   protected void end() {
+    Subsystems.driveTrain.stop();
   }
 
+  /**
+   * End this command if it is interrupted by another one.
+   * This will allow autonomous to take over.
+   */
   @Override
   protected void interrupted() {
     end();
