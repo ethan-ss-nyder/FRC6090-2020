@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,9 +45,43 @@ public class OI {
     for (int i = 1; i <= JOYSTICK_BUTTON_COUNT; i++) {
       joystickButton[i] = new JoystickButton(joystick, i);
     }
-    /* Assign button actions here */
+    /*
+     * Assign button actions here.
+     * UPDATE: This way is DEPRECATED, only put CRUCIAL, INTERNAL actions
+     * that will never change across robots here. For external,
+     * robot-specific actions, use the registerCommand() method.
+     */
     /* joystickButton[2].whileHeld(new SomeCommand()); */
     /* joystickButton[9].whenPressed(new AnotherCommand());*/
+  }
+
+  /**
+   * The different action types that a command is invoked via.
+   * PRESS signifies that when a button is pressed, a command
+   * will run until it is complete or interrupted. HOLD is useful
+   * to run a command only when a button is held, interrupting the
+   * command if it has not completed by the time the button is
+   * released.
+   */
+  public static enum ActionType {
+    PRESS, HOLD
+  }
+
+  /**
+   * Register a command with the OI, mapping it to a joystick button.
+   * @param button The button to register the command to.
+   * @param actionType The action type that the command should be invoked on.
+   * @param command The command to register with the OI.
+   */
+  public void registerCommand(int button, ActionType actionType, Command command) {
+    switch (actionType) {
+      case PRESS:
+        joystickButton[button].whenPressed(command);
+        break;
+      case HOLD:
+        joystickButton[button].whileHeld(command);
+        break;
+    }
   }
 
   /**
