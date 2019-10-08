@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI.ActionType;
-import frc.robot.commands.ZeroDrivetrainEncoders;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,7 +36,14 @@ public class Robot extends TimedRobot {
      * in the OI. This method allows the OI to be portable, that is, it can be used
      * across robot projects and years. 
      */
-    oi.registerCommand(11, ActionType.PRESS, new ZeroDrivetrainEncoders());
+
+    /* Zero the drivetrain encoders when button 11 is pressed. */
+    oi.registerCommand(11, ActionType.PRESS, new Runnable() {
+      @Override
+      public void run() {
+        Subsystems.driveTrain.zero();
+      }
+    }, Subsystems.driveTrain);
 
     //chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
