@@ -90,7 +90,10 @@ public class OI {
    * API methods need to be called directly from a joystick button, or some other random,
    * very simplistic code needs to be run that doesn't necessarily require a full command.
    * This is most practical when the runnable inteface is implemented as an annonomous class,
-   * allowing very minimal code to be written. Runnable's run() function is executed.
+   * allowing very minimal code to be written. Runnable's run() function is executed. This method
+   * is even more efficent with the use of Lambda expressions, too! Since Runnable is a single-method
+   * interface, a lambda expresson can be passed directly to this function, so not even an annonomous
+   * inner type is needed!
    * @param button The button to map the runnable too.
    * @param actionType The button action type.
    * @param runnable The instantiation of Runnable to execute. This is actually wrapped into a custom command that
