@@ -70,7 +70,21 @@ public class DriveTrain extends SwerveDrive {
            * and how many encoder counts it takes to go one full revolution to convert the angle
            * into an encoder count.
            */
-          double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, PIVOT_REVOLUTION);
+          double currentPos = swerveModule.getPivotMotorEncoder();
+          double targetPos = SwerveDriveCalculator.convertFromDegrees(targetAngle, PIVOT_REVOLUTION);
+
+          /* Find the distance between where we currently are and where we want to be. */
+          double distance = (targetPos - (currentPos % PIVOT_REVOLUTION));
+          /**
+           * Find the shortest distance possible to get from the current position to
+           * the target position.
+           */
+          if (distance > (PIVOT_REVOLUTION / 2.0) || distance < - (PIVOT_REVOLUTION / 2.0)) {
+            distance = PIVOT_REVOLUTION - Math.abs(distance);
+          }
+          /* The final reference is just an offset of distance from the current position. */
+          double pivotRef = currentPos + distance;
+
           /* Pass the pivot reference into the pivot motor of the swerve module. */
           swerveModule.setPivotReference(pivotRef);
           /* Set the drive motor speed to the calculated speed. */
