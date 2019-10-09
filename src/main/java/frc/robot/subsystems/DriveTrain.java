@@ -70,10 +70,9 @@ public class DriveTrain extends SwerveDrive {
            * and how many encoder counts it takes to go one full revolution to convert the angle
            * into an encoder count.
            */
-          double pivotRev = PIVOT_REVOLUTION;
-          double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, pivotRev);
+          double pivotRef = SwerveDriveCalculator.convertFromDegrees(targetAngle, PIVOT_REVOLUTION);
           /* Pass the pivot reference into the pivot motor of the swerve module. */
-          swerveModule.setPivotReference(pivotRef % pivotRev);
+          swerveModule.setPivotReference(pivotRef);
           /* Set the drive motor speed to the calculated speed. */
           swerveModule.setDriveMotorSpeed(speed);
         }
