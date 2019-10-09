@@ -31,7 +31,7 @@ public class NeoSwerveModule extends AbstractSwerveModule {
     public NeoSwerveModule (int driveCanId, int pivotCanId) {
         driveMotor = new CANSparkMax(driveCanId, MotorType.kBrushless);
         pivotMotor = new CANSparkMax(pivotCanId, MotorType.kBrushless);
-        pivotMotor.setOpenLoopRampRate(0);
+        pivotMotor.setClosedLoopRampRate(0.4);
         pivotMotor.setIdleMode(IdleMode.kCoast);
 
         pivotPid = pivotMotor.getPIDController();
