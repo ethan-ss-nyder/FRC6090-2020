@@ -40,6 +40,8 @@ public class OI {
   /* Joystick Buttons */
   private JoystickButton[] joystickButton = new JoystickButton[JOYSTICK_BUTTON_COUNT + 1];
 
+  private double deadband = 0.0;
+
   public OI() {
     /* Instantiate all the buttons for easy use, and less code. */
     joystickButton[0] = null; /* There is no button on 0. */
@@ -66,6 +68,14 @@ public class OI {
    */
   public static enum ActionType {
     PRESS, HOLD
+  }
+
+  public void setDeadband(double deadband) {
+    this.deadband = deadband;
+  }
+
+  public double getDeadband() {
+    return deadband;
   }
 
   /**
@@ -372,10 +382,9 @@ public class OI {
    * Calculate a deadband mod.
    * 
    * @param joystickInput The input on the joystick to mod
-   * @param deadband The deadband to apply to the {@code joystickInput}
    * @return The result of the mod.
    */
-  public double deadbandMod(double joystickInput, double deadband) {
+  public double deadbandMod(double joystickInput) {
     /* This will be our result */
     double mod;
     /* Compute the deadband mod */
